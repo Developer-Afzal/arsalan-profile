@@ -129,7 +129,7 @@ function smtp_mailer($to, $subject, $html_msg, $text_msg, $reply_email, $reply_n
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 587;
         $mail->Username = $_ENV['MY_MAIL'];  
-        $mail->Password = "rgcvhjfmolyntxee";     
+        $mail->Password = $_ENV['MAIL_PASSCODE'];     
         
         // Sender and recipient
         $mail->setFrom($_ENV['MY_MAIL'], "Website Contact Form");
