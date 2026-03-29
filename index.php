@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="include/css/fontawesome.min.css" type="text/css">
     <!-- All custom Css here -->
     <link href="include/css/style.css" rel="stylesheet" type="text/css">
+    
   </head>
   <body class="d-flex flex-column">
     <!-- ============================ HEADER START ============================== -->
@@ -1816,32 +1817,35 @@ From Uttar Pradesh, India, where the chai's strong and the creativity's stronger
                     <h5 class="opacity-75">Want to know more about me, tell me about your project or just to say hello? Drop me a line and I'll get back as soon as possible.</h5>
                   </div>
                   <div class="col-lg-7 ms-auto">
-                    <!-- <div class="form-container">
-                      <form method="post" action="mail.php" id="messageForm">
+                    <div class="form-container">
+                      <form method="post" action="send_email.php" id="messageForm">
                         <div class="mb-4">
-                          <label for="name" class="form-label">Name</label>
-                          <input type="text" name="name" class="form-control" id="name" required>
+                            <label class="form-label" for="name">Full Name <span class="required">*</span></label>
+                            <input  class="form-control" type="text" id="name" name="name">
                         </div>
 
                         <div class="mb-4">
                           <label for="email" class="form-label">Email address</label>
-                          <input type="email" name="email" class="form-control" id="email" required>
+                          <input class="form-control" type="email" id="email" name="email" >
                         </div>
 
                         <div class="mb-4">
                           <label for="phone" class="form-label">Phone</label>
-                          <input type="tel" name="phone" class="form-control" id="phone" required>
+                          <input class="form-control" type="tel" id="phone" name="phone" maxlength="10">
                         </div>
 
                         <div class="mb-4">
                           <label for="message" class="form-label">Message</label>
-                          <textarea class="form-control" name="message" id="message" rows="3" required></textarea>
+                          <textarea class="form-control" id="message" name="message"  ></textarea>
                         </div>
 
                         <div class="mb-4 form-check ps-0">
-                          <input type="checkbox" class="form-check-input" id="agree" name="agree" required>
+                          <input type="checkbox" class="form-check-input" id="agree" name="agree" >
                           <label for="agree" class="form-check-label">By sending the form you agree to the Terms &amp; Conditions and Privacy Policy.</label>
                           <label for="agree" class="error block"></label>
+                        </div>
+                        <div class="mb-4 from-label">
+                          <p id="error"></p>
                         </div>
                         <div class="position-relative">
                           <button type="submit" class="link link-xxl text-body-color" data-text="Submit">
@@ -1850,30 +1854,8 @@ From Uttar Pradesh, India, where the chai's strong and the creativity's stronger
                           <div class="loading" style="display: none;"></div>
                         </div>
                       </form>
-                      <div class="messgaeOutput" id="messgaeOutput">
-                        <div id="success">
-                          <h4>Thank you!</h4>
-                          <p>Your message was sent successfully! I will be in touch as soon as I can.</p>
-                        </div>
-                        <div id="error">
-                          <h4>Opppsss..... Sorry!</h4>
-                          <p>Something went wrong, try refreshing and submitting the form again.</p>
-                        </div>
-                      </div>
-                    </div> -->
-                  <form method="post" action="mail.php">
-
-  <input type="text" name="name" placeholder="Name" required><br><br>
-
-  <input type="email" name="email" placeholder="Email" required><br><br>
-
-  <input type="tel" name="phone" placeholder="Phone" required><br><br>
-
-  <textarea name="message" placeholder="Message" required></textarea><br><br>
-
-  <button type="submit">Send</button>
-
-</form>
+                    </div>
+       
                   </div>
                 </div>
               </div>

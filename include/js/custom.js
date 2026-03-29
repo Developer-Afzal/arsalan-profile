@@ -376,38 +376,92 @@ jQuery(document).ready(function ($) {
 
   //15. START -- Validate and submit form with AJAX
 
-  $('#messageForm').validate({
-    submitHandler: function (form) {
-        $('.loading').show();
-        $(form).ajaxSubmit({
-            type: 'POST',
-            data: $(form).serialize(),
-            url: 'mail.php',
-            success: function () {
-                $('.loading').hide();
-                $(form).trigger('reset');
-                $('#messageForm').addClass('hide');
-                $('#success').fadeIn();
-            },
-            error: function () {
-                $('.loading').hide();
-                $(form).trigger('reset');
-                $('#messageForm').addClass('hide');
-                $('#error').fadeIn();
-            }
-        });
-    },
-    messages: {
-        name: 'Please enter your name',
-        email: 'Please enter a valid email address',
-        phone: 'Please enter your phone number',
-        message: 'Please enter your message',
-        agree: 'Please agree to my Terms & Conditions and Privacy Policy'
-    },
-    errorPlacement: function (error, element) {
-        error.insertAfter(element);
-    }
-});
+//   $('#messageForm').validate({
+//     submitHandler: function (form) {
+//         $('.loading').show();
+//         $(form).ajaxSubmit({
+//             type: 'POST',
+//             data: $(form).serialize(),
+//             url: 'send_email.php',
+//             success: function () {
+//                 $('.loading').hide();
+//                 window.location.href = "send_email.php"; 
+//                 $(form).trigger('reset');
+//                 $('#messageForm').addClass('hide');
+//                 $('#success').fadeIn();
+//             },
+//             error: function () {
+//                 $('.loading').hide();
+//                 $(form).trigger('reset');
+//                 $('#messageForm').addClass('hide');
+//                 $('#error').fadeIn();
+//             }
+//         });
+//     },
+//     messages: {
+//         name: 'Please enter your name',
+//         email: 'Please enter a valid email address',
+//         phone: 'Please enter your phone number',
+//         message: 'Please enter your message',
+//         agree: 'Please agree to my Terms & Conditions and Privacy Policy'
+//     },
+//     errorPlacement: function (error, element) {
+//         error.insertAfter(element);
+//     }
+// });
 
   //15. END -- Validate and submit form with AJAX
 })
+
+
+document.getElementById("messageForm").addEventListener("submit", function(e) {
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let message = document.getElementById("message").value.trim();
+    let agree = document.getElementById("agree");
+    let isChecked = agree.checked;
+    let errorBox = document.getElementById("error");
+    console.log(name);
+    
+    let error = "";
+
+    // Name validation
+    if (name === "") {
+        error = "Please enter your name";
+    }
+
+    // Email validation
+    else if (!/^\S+@\S+\.\S+$/.test(email)) {
+        error = "Please enter a valid email";
+    }
+
+ // Phone validation - 
+if (phone === "") {
+    error = "Please enter your phone number";
+} else if (!/^\d+$/.test(phone)) {
+    error = "Phone number can only contain digits (0-9)"; 
+} else if (phone.length !== 10 || phone.length > 10) {
+    error = "Phone number must be exactly 10 digits";
+} else if (!/^[6-9]/.test(phone)) {
+    error = "Phone number must start with 6, 7, 8, or 9";
+}
+
+    // Message validation
+    else if (message === "") {
+        error = "Please enter your message";        
+    }
+
+    else if (!isChecked) {
+        error = "Please Accept Terms & Conditions Policy";
+    }
+    console.log(isChecked);
+    
+   if (error !== "") {
+            e.preventDefault();
+            errorBox.style.display = "block";
+            errorBox.innerText = error;
+        }
+
+});
