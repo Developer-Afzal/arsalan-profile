@@ -1,9 +1,36 @@
 <?php
 require 'vendor/autoload.php';
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+// $dotenv->load();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+
+// Load environment variables
+function loadEnvironment() {
+    // Check if we're on Render
+    $isRender = getenv('RENDER') !== false;
+    
+    if (!$isRender && file_exists(__DIR__ . '/.env')) {
+        // Local development with .env file
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+        error_log("Loaded .env file for local development");
+    } else {
+        // Production on Render - use system environment variables
+        error_log("Running on Render, using system environment variables");
+    }
+}
+
+loadEnvironment();
+
+// Helper function to get environment variables
+function env($key, $default = null) {
+    $value = getenv($key);
+    if ($value === false) {
+        return $default;
+    }
+    return $value;
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
